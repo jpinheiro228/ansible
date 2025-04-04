@@ -11,3 +11,5 @@
       - git
       - rsync
       - tmux
+      - openssh
+      - nano

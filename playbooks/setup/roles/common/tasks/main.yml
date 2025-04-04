@@ -7,5 +7,5 @@
   import_tasks: pacman.yml
   when: ansible_facts['os_family']|lower == 'archlinux'
 
-- name: ensure local user
+- name: Ensure local user
   import_tasks: localuser.yml

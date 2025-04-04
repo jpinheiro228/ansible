@@ -1,0 +1,5 @@
+---
+- name: Setup network and security
+  include_tasks: "{{ item }}"
+  loop:
+    - ssh.yml
