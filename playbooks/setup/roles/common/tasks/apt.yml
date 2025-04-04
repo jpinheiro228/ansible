@@ -1,0 +1,17 @@
+---
+- name: Update all packages (apt)
+  ansible.builtin.apt:
+    upgrade: dist
+    update_cache: yes
+
+- name: Install default packages (apt)
+  ansible.builtin.apt:
+    state: present
+    name:
+      - python3
+      - python3-pip
+      - build-essential
+      - git
+      - rsync
+      - tmux
+  when: inventory_hostname|lower != 'proxmox'

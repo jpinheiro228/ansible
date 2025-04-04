@@ -1,0 +1,13 @@
+---
+- name: Update all packages (Pacman)
+  community.general.pacman:
+    upgrade: true
+    update_cache: true
+
+- name: Install default packages (Pacman)
+  community.general.pacman:
+    state: present
+    name:
+      - git
+      - rsync
+      - tmux

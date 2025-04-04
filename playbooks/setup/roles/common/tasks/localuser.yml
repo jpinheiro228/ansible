@@ -1,0 +1,39 @@
+---
+- name: Ensure local group
+  ansible.builtin.group:
+    name: jpinheiro
+    state: present
+
+- name: Ensure local user
+  ansible.builtin.user:
+    create_home: true
+    name: jpinheiro
+    comment: Joao Pinheiro
+    append: true
+    groups: jpinheiro,sudo
+    password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          36616534303039613430386639616432346162666337613231366564353062643363313365643735
+          3839636338323533616239363463663031376534333964310a616437316631316462383933346661
+          36383930396534633130383439653831333564353238333563623763333533313261366563656337
+          6638613864353030350a316233623462393033326432646162303434396431303365323962343830
+          36306336346438313734343537343361363161303933666433393333336431323161626534316666
+          34393739393861656361633466323234383336636636366535316666336264343766356335333439
+          333566633966336533386635396264333366
+    shell: /bin/bash
+    state: present
+    update_password: on_create
+
+- name: Add SSH Key (babyshark)
+  ansible.posix.authorized_key:
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDzsLKi8UCy4ugUWs2h1rKTqDDCH8uhMXdOIFYKsfOGt
+    state: present
+    user: jpinheiro
+    comment: jpinheiro@babyshark
+
+- name: Add SSH Key (latitude)
+  ansible.posix.authorized_key:
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIsr/166pdWihHIsuQyDAF1r+lFOtrcwR+GIhppWO42E
+    state: present
+    user: jpinheiro
+    comment: jpinheiro@latitude
